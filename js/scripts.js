@@ -158,7 +158,7 @@ const fillsTheObjectWithValues = (phraseO) => {
   dataStrings.sixthFloor.secretCode = phrase1;
 };
 
-fillsTheObjectWithValues('Si no estudias acabarás como Enrique');
+fillsTheObjectWithValues('estamos viendo objetos');
 console.log(
   dataStrings.firstFloor.vowels,
   dataStrings.secondFloor.consonants,
@@ -167,3 +167,42 @@ console.log(
   dataStrings.fifthFloor.wordsInLowercase,
   dataStrings.sixthFloor.secretCode
 );
+
+//Crea una funcion que reciba una palabra
+//haz que la funcion sustituya cada vocal por su letra anterior en el abecedario
+//haz que cada consonante se sustituya por la letra en 2 posiciones siguientes
+//haz que reciba una frase en lugar de una palabra, sustituye cada espacio por un numero entre 0 y 10
+//si alguna vocal está acentuada, se sustituirá por un *
+//si alguna consonante es una ñ se sustituirá por un $
+
+const replaceVowel = (word) => {
+  const vowel = 'aeiou';
+  const vowelAccented = 'áéíóú';
+  const abc = 'abcdefghijklmnñopqrstuvwxyz';
+  let replace = '';
+
+  for (let i = 0; i < word.length; i++) {
+    const letter = word[i];
+    if (vowel.includes(letter)) {
+      //Si es una vocal
+      if (letter === 'a') {
+        replace += 'z';
+      } else {
+        replace += abc.charAt(abc.indexOf(letter) - 1);
+      }
+    } else if (vowelAccented.includes(letter)) {
+      replace += '*';
+    } else {
+      //si no es vocal
+      if (word[i] === ' ') {
+        replace += Math.floor(Math.random() * 11);
+      } else if (letter === 'ñ') {
+        replace += '$';
+      } else {
+        replace += abc.charAt(abc.indexOf(letter) - 2);
+      }
+    }
+  }
+  console.log(replace);
+};
+replaceVowel('el murciélago estaba volando con un ñandú');
